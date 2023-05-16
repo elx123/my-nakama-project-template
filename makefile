@@ -11,3 +11,6 @@ nakamaserver:
 		--build-arg BUILD_REF=$(VERSION) \
 		--build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` \
 		.
+
+dev-up:
+	docker-compose -f zarf/docker-compose/docker-compose.yml up
