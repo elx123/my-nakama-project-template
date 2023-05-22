@@ -13,4 +13,4 @@ nakamaserver:
 		.
 
 dev-up:
-	docker-compose -f zarf/docker-compose/docker-compose.yml up
+	docker-compose -f zarf/docker-compose/docker-compose.yml up  

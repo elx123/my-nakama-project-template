@@ -6,13 +6,13 @@ import (
 	"time"
 
 	"github.com/heroiclabs/nakama-common/runtime"
-	"heroiclabs.com/go-setuo-demo/gamelogic"
+	"heroiclabs.com/go-setuo-demo/gamelogic/healthcheck"
 )
 
 func InitModule(ctx context.Context, logger runtime.Logger, db *sql.DB, nk runtime.NakamaModule, initializer runtime.Initializer) error {
 	initStart := time.Now()
 
-	err := initializer.RegisterRpc("healthcheck", gamelogic.RpcHealthcheck)
+	err := initializer.RegisterRpc("healthcheck", healthcheck.RpcHealthcheck)
 	if err != nil {
 		return err
 	}
