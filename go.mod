@@ -1,4 +1,4 @@
-module heroiclabs.com/go-setuo-demo
+module github.com/heroiclabs.com/go-setuo-demo
 
 go 1.20
 
