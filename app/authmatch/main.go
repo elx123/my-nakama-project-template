@@ -69,6 +69,8 @@ func rpcCreateMatch(ctx context.Context, logger runtime.Logger, db *sql.DB, nk r
 	if err != nil {
 		return "", err
 	}
+	logger.Debug("success create match id:")
+	logger.Debug(matchID)
 
 	return matchID, nil
 }
@@ -139,13 +141,19 @@ func (m *Match) MatchLeave(ctx context.Context, logger runtime.Logger, db *sql.D
 
 func (m *Match) MatchLoop(ctx context.Context, logger runtime.Logger, db *sql.DB, nk runtime.NakamaModule, dispatcher runtime.MatchDispatcher, tick int64, state interface{}, messages []runtime.MatchData) interface{} {
 	if state.(*MatchState).debug {
-		logger.Info("match loop match_id %v tick %v", ctx.Value(runtime.RUNTIME_CTX_MATCH_ID), tick)
-		logger.Info("match loop match_id %v message count %v", ctx.Value(runtime.RUNTIME_CTX_MATCH_ID), len(messages))
+		logger.Debug("match loop match_id %v tick %v", ctx.Value(runtime.RUNTIME_CTX_MATCH_ID), tick)
+		logger.Debug("match loop match_id %v message count %v", ctx.Value(runtime.RUNTIME_CTX_MATCH_ID), len(messages))
 	}
 
-	if tick >= 10 {
-		return nil
+	logger.Debug("num %v", len(messages))
+
+	for _, message := range messages {
+		logger.Debug("Received %v from %v", string(message.GetData()), message.GetUserId())
+		reliable := true
+		dispatcher.BroadcastMessage(1, message.GetData(), []runtime.Presence{message}, nil, reliable)
 	}
+
+	logger.Debug("processing test 2")
 
 	return state
 }
