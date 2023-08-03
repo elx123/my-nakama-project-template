@@ -5,6 +5,7 @@ GOLANG       := golang:1.20
 VERSION := 1.0
 
 nakamaserver:
+	export DOCKER_BUILDKIT=1
 	docker build \
 		-f zarf/docker/Dockerfile \
 		-t nakamaserver:$(VERSION) \

@@ -71,7 +71,7 @@ func rpcCreateMatch(ctx context.Context, logger runtime.Logger, db *sql.DB, nk r
 	}
 	logger.Debug("success create match id:")
 	logger.Debug(matchID)
-
+ 
 	return matchID, nil
 }
 
